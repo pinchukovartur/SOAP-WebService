@@ -1,0 +1,1 @@
+INSERT INTO student(name, surname, group, averagescore) VALUES ('pinch','pinch',1,2);
