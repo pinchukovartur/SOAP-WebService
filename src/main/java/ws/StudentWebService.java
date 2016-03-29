@@ -19,5 +19,5 @@ public interface StudentWebService {
     public String deleteStudent(int idstudent);
 
     @WebMethod
-    public List<Student> getStudentTable();
+    public String searchStudent(int idstudent);
 }

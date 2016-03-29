@@ -1,1 +1,1 @@
-INSERT INTO student(name, surname, group, averagescore) VALUES ('pinch','pinch',1,2);
+SELECT distinct student.surname FROM student WHERE student.idstudent = 1;

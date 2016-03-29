@@ -9,5 +9,6 @@ public class Constants {
 
     static final String DELETE = "DELETE FROM student WHERE idstudent=?";
 
-    static final String GET_ALL = "SELECT * FROM student";
+    static final String SEARCH = "SELECT distinct student.idstudent, student.name, student.surname, student.score," +
+            " student.brigada FROM student WHERE idstudent = ?;";
 }

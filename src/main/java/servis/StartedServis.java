@@ -11,6 +11,7 @@ public class StartedServis {
             // запускаем веб-сервер на порту 1986
             // и по адресу, указанному в первом аргументе,
             // запускаем веб-сервис, передаваемый во втором аргументе
-            Endpoint.publish("http://localhost:1986/wss/hello", new StudentWebServiceImpl());
+
+            Endpoint.publish("http://localhost:1996/wss/hello", new StudentWebServiceImpl());
         }
 }

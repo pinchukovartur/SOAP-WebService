@@ -2,16 +2,13 @@ package servis;
 
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
-import ws.Student;
 
 import java.applet.Applet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static servis.Constants.DELETE;
-import static servis.Constants.GET_ALL;
-import static servis.Constants.INSERT;
+import static servis.Constants.*;
 
 public class DAO extends Applet{
 
@@ -22,17 +19,13 @@ public class DAO extends Applet{
     private PreparedStatement statement = null;
 
     public DAO(){
-        try {
-            Driver driver = new FabricMySQLDriver();
-            DriverManager.registerDriver(driver);
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setStudent(String name, String surname, int group, int averageScore) {
         try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             statement = connection.prepareStatement(INSERT);
             statement.setString(1, name);
             statement.setString(2, surname);
@@ -49,6 +42,9 @@ public class DAO extends Applet{
     public void deleteStudent(int idstudent) {
 
         try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             statement = connection.prepareStatement(DELETE);
             statement.setInt(1, idstudent);
             statement.executeUpdate();
@@ -59,24 +55,23 @@ public class DAO extends Applet{
         }
     }
 
-    public ArrayList<Student> getStudentTable() {
-
-        ArrayList<Student> students = new ArrayList<Student>();
-        Student student;
-
+    public String searchStudent(int idStudent) {
+        String student = new String();
         try {
-            statement = connection.prepareStatement(GET_ALL);
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            statement = connection.prepareStatement(SEARCH);
+            statement.setInt(1, idStudent);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                student = new Student();
-                int id = resultSet.getInt("idstudent");
-                String name = resultSet.getString("name");
-                String secondName = resultSet.getString("surname");
-                int averageScore = resultSet.getInt("score");
-                int group = resultSet.getInt("brigada");
-                System.out.println(id+name+secondName+averageScore+group);
-                students.add(student.setIdStudent(id).setName(name).setSurname(secondName).
-                        setAverageScore(averageScore).setGroup(group));
+                String st0 = resultSet.getString("idstudent");
+                String st1 = resultSet.getString("name");
+                String st2 = resultSet.getString("surname");
+                String st3 = String.valueOf(resultSet.getInt("score"));
+                String st4 = String.valueOf(resultSet.getInt("brigada"));
+                student = st0 + "    " + st1 + "    " + st2 + "    " + st3 + "    " + st4;
+
             }
             statement.execute();
             connection.close();
@@ -85,6 +80,6 @@ public class DAO extends Applet{
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-        return students;
+        return student;
     }
 }

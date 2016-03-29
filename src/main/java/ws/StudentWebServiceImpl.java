@@ -30,7 +30,7 @@ public class StudentWebServiceImpl implements StudentWebService {
     }
 
     @Override
-    public List<Student> getStudentTable() {
-        return dao.getStudentTable();
+    public String searchStudent(int idstudent) {
+        return dao.searchStudent(idstudent);
     }
 }
