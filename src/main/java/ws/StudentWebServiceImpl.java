@@ -2,9 +2,6 @@ package ws;// таже аннотация, что и при описании и�
 import servis.DAO;
 
 import javax.jws.WebService;
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.List;
 
 // но здесь используется с параметром endpointInterface,
 // указывающим полное имя класса интерфейса нашего веб-сервиса
@@ -24,13 +21,13 @@ public class StudentWebServiceImpl implements StudentWebService {
     }
 
     @Override
-    public String deleteStudent(int idstudent) {
-        dao.deleteStudent(idstudent);
+    public String deleteStudentById(int idstudent) {
+        dao.deleteStudentById(idstudent);
         return "Вы удалили студента :( надеюсь не отчислили";
     }
 
     @Override
-    public String searchStudent(int idstudent) {
-        return dao.searchStudent(idstudent);
+    public String searchStudentById(int idstudent) {
+        return dao.searchStudentById(idstudent);
     }
 }

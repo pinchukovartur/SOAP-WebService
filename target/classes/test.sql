@@ -1,1 +1,0 @@
-SELECT distinct student.surname FROM student WHERE student.idstudent = 1;

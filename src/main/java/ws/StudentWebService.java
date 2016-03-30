@@ -3,8 +3,6 @@ package ws;// это аннотации, т.е. способ отметить н
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
-import java.util.ArrayList;
-import java.util.List;
 
 // говорим, что наш интерфейс будет работать как веб-сервис
 @WebService
@@ -16,8 +14,8 @@ public interface StudentWebService {
     public String setNewStudentInDB(String name, String surname, int group, int averageScore);
 
     @WebMethod
-    public String deleteStudent(int idstudent);
+    public String deleteStudentById(int idstudent);
 
     @WebMethod
-    public String searchStudent(int idstudent);
+    public String searchStudentById(int idstudent);
 }

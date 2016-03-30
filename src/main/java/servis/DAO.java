@@ -39,7 +39,7 @@ public class DAO extends Applet{
         }
     }
 
-    public void deleteStudent(int idstudent) {
+    public void deleteStudentById(int idstudent) {
 
         try {
             Driver driver = new FabricMySQLDriver();
@@ -55,8 +55,8 @@ public class DAO extends Applet{
         }
     }
 
-    public String searchStudent(int idStudent) {
-        String student = new String();
+    public String searchStudentById(int idStudent) {
+        String student = null;
         try {
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
@@ -65,12 +65,12 @@ public class DAO extends Applet{
             statement.setInt(1, idStudent);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String st0 = resultSet.getString("idstudent");
-                String st1 = resultSet.getString("name");
-                String st2 = resultSet.getString("surname");
-                String st3 = String.valueOf(resultSet.getInt("score"));
-                String st4 = String.valueOf(resultSet.getInt("brigada"));
-                student = st0 + "    " + st1 + "    " + st2 + "    " + st3 + "    " + st4;
+                String idstudent = resultSet.getString("idstudent");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String score = String.valueOf(resultSet.getInt("score"));
+                String group = String.valueOf(resultSet.getInt("brigada"));
+                student = idStudent + "    " + name + "    " + surname + "    " + score + "    " + group;
 
             }
             statement.execute();
