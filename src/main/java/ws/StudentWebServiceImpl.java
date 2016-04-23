@@ -1,7 +1,10 @@
 package ws;// таже аннотация, что и при описании интерфейса,
-import servis.DAO;
+
+import model.Student;
+import servis.DAO.DAO;
 
 import javax.jws.WebService;
+import java.util.ArrayList;
 
 // но здесь используется с параметром endpointInterface,
 // указывающим полное имя класса интерфейса нашего веб-сервиса
@@ -15,19 +18,37 @@ public class StudentWebServiceImpl implements StudentWebService {
     }
 
     @Override
-    public String setNewStudentInDB(String name, String surname, int group, int averageScore) {
-        dao.setStudent(name,surname,group,averageScore);
-        return "Студент успешно добавлен) добро пожаловать в семью!!!";
+    public void setNewStudentInDB(Student student) {
+        dao.setStudent(student);
     }
 
     @Override
-    public String deleteStudentById(int idstudent) {
+    public void deleteStudentById(int idstudent) {
         dao.deleteStudentById(idstudent);
-        return "Вы удалили студента :( надеюсь не отчислили";
     }
 
     @Override
-    public String searchStudentById(int idstudent) {
+    public Student searchStudentById(int idstudent) {
+        Student student = new Student();
+        if(dao.searchStudentById(idstudent)!=null)
         return dao.searchStudentById(idstudent);
+        else return student;
+    }
+
+    @Override
+    public ArrayList<Student> getAllStudent() {
+        return dao.getAllStudent();
+    }
+
+    @Override
+    public void updateStudentById(Student student) {
+        System.out.println(student.getName());
+        dao.updateStudentById(student);
+    }
+
+    @Override
+    public int getDBSize() {
+        int sizeDB = dao.getAllStudent().size()-1;
+        return dao.getAllStudent().get(sizeDB).getIdStudent()+3;
     }
 }

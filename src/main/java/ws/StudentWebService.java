@@ -1,8 +1,12 @@
 package ws;// это аннотации, т.е. способ отметить наши классы и методы,
 // как связанные с веб-сервисной технологией
+
+import model.Student;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 
 // говорим, что наш интерфейс будет работать как веб-сервис
 @WebService
@@ -11,11 +15,20 @@ import javax.jws.soap.SOAPBinding;
 public interface StudentWebService {
     // говорим, что этот метод можно вызывать удаленно
     @WebMethod
-    public String setNewStudentInDB(String name, String surname, int group, int averageScore);
+    public void setNewStudentInDB(Student student);
 
     @WebMethod
-    public String deleteStudentById(int idstudent);
+    public void deleteStudentById(int idstudent);
 
     @WebMethod
-    public String searchStudentById(int idstudent);
+    public Student searchStudentById(int idstudent);
+
+    @WebMethod
+    public ArrayList<Student> getAllStudent();
+
+    @WebMethod
+    public void updateStudentById(Student student);
+
+    @WebMethod
+    public int getDBSize();
 }
